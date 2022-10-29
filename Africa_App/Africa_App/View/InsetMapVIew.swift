@@ -14,31 +14,35 @@ struct InsetMapVIew: View {
     
     //MARK: - BODY
     var body: some View {
-        Map(coordinateRegion: $region)
-            .overlay(alignment: .topTrailing, content: {
-                NavigationLink(destination: MapView()) {
-                    HStack {
-                        Image(systemName: "mappin.circle")
-                            .foregroundColor(.white)
-                            .imageScale(.large)
+        if #available(iOS 15.0, *) {
+            Map(coordinateRegion: $region)
+                .overlay(alignment: .topTrailing, content: {
+                    NavigationLink(destination: MapView()) {
+                        HStack {
+                            Image(systemName: "mappin.circle")
+                                .foregroundColor(.white)
+                                .imageScale(.large)
+                            
+                            Text("Locations")
+                                .foregroundColor(.accentColor)
+                                .fontWeight(.bold)
+                        } //HSTACK
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 14)
+                        .background(
+                            Color.black
+                                .opacity(0.4)
+                                .cornerRadius(8)
+                        )
                         
-                        Text("Locations")
-                            .foregroundColor(.accentColor)
-                            .fontWeight(.bold)
-                    } //HSTACK
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 14)
-                    .background(
-                        Color.black
-                            .opacity(0.4)
-                            .cornerRadius(8)
-                    )
-                    
-                } //Navigation
-                .padding(12)
-            })
-            .frame(height: 256)
-            .cornerRadius(12)
+                    } //Navigation
+                    .padding(12)
+                })
+                .frame(height: 256)
+                .cornerRadius(12)
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 
