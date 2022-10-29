@@ -28,11 +28,15 @@ struct MainView: View {
                     Text("Locations")
                 }
             
-            GalleryView()
-                .tabItem {
-                    Image(systemName: "photo")
-                    Text("Gallery")
-                }
+            if #available(iOS 16.0, *) {
+                GalleryView()
+                    .tabItem {
+                        Image(systemName: "photo")
+                        Text("Gallery")
+                    }
+            } else {
+                // Fallback on earlier versions
+            }
         } //Tab
     }
 }
